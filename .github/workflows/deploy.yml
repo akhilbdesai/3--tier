@@ -31,6 +31,17 @@ jobs:
         run: |
           sed -i "s|IMAGE_PLACEHOLDER|${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}|g" k8s/deployment.yaml
 
+          # Step 3: Trigger CodeBuild project (Build and deploy to EKS)
+      - name: Trigger CodeBuild project
+        run: |
+          aws codebuild start-build --project-name MyEKSBuildProject
+
+      # Step 4: Optional, monitor build logs from CodeBuild
+      - name: Monitor CodeBuild logs
+        run: |
+          BUILD_ID=$(aws codebuild list-builds-for-project --project-name MyEKSBuildProject --query 'ids[0]' --output text)
+          aws codebuild batch-get-builds --ids $BUILD_ID
+
       - name: Configure kubectl
         run: |
           aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }} --role-arn arn:aws:iam::495599743940:role/GitHubActionsEKSRole
