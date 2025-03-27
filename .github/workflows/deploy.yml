@@ -50,3 +50,5 @@ jobs:
       - name: Verify Deployment
         run: |
           kubectl rollout status deployment/tasky-app -n tasky
+
+          ##
