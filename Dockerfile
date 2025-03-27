@@ -12,9 +12,12 @@ FROM alpine:3.17.0 as release
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
-# Create the wizexercise.txt file with the text "Wiz+Google"
-RUN echo "Wiz+Google" > /app/wizexercise.txt
+
+# Ensure /app directory exists and create wizexercise.txt with text "Wiz+Google"
+RUN mkdir -p /app && echo "Wiz+Google" > /app/wizexercise.txt
+
+# Debugging: Check the contents of the /app directory
+RUN ls -l /app
+
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]
-
-
