@@ -21,7 +21,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::495599743940:role/GitHubActionsEKSRole
-          aws-region: ${{ secrets.us-east-2 }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
         id: login-ecr
