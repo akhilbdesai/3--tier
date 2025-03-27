@@ -25,8 +25,6 @@ jobs:
         
       - name: Login to Amazon ECR
         run: |
-         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
       
       - name: Update Kubernetes manifests
@@ -40,7 +38,6 @@ jobs:
       - name: Verify AWS Identity
         run: aws sts get-caller-identity
 
-
       - name: Verify kubectl access
         run: |
           kubectl config current-context
@@ -53,6 +50,5 @@ jobs:
 
       - name: Verify Deployment
         run: |
-          kubectl rollout status deployment/tasky-app -n tasky
+          kubectl rollout status deployment/tasky-app -n tasky --timeout=5m
 
-          ###
