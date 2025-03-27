@@ -29,16 +29,6 @@ jobs:
          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
       
-      - name: Build, tag, and push Docker image
-        env:
-          IMAGE_TAG: ${{ github.sha }}
-        run: |
-          # Build the Docker image
-          docker build -t public.ecr.aws/s5y7m4v1/tasky/a:$IMAGE_TAG .
-          # Push the Docker image to the public ECR repository (no login required)
-          docker push public.ecr.aws/s5y7m4v1/tasky/a:$IMAGE_TAG
-
-
       - name: Update Kubernetes manifests
         run: |
           sed -i "s|IMAGE_PLACEHOLDER|${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}|g" k8s/deployment.yaml
