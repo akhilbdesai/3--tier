@@ -35,8 +35,8 @@ jobs:
 
       - name: Configure kubectl
         run: |
-          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
-   
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }} --role-arn arn:aws:iam::495599743940:role/GitHubActionsEKSRole
+    
       - name: Verify AWS Identity
         run: aws sts get-caller-identity
 
