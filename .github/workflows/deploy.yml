@@ -22,9 +22,11 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::495599743940:role/GitHubActionsEKSRole
           aws-region: ${{ secrets.AWS_REGION }}
-          
-      - name: Login to Amazon ECR Public
+        
+      - name: Login to Amazon ECR
         run: |
+         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
       
       - name: Build, tag, and push Docker image
