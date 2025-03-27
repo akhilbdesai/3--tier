@@ -27,14 +27,14 @@ jobs:
         run: |
          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
       
-     - name: Build, tag, and push Docker image
-       env:
-         IMAGE_TAG: ${{ github.sha }}
-       run: |
-         # Build the Docker image
-         docker build -t public.ecr.aws/s5y7m4v1/tasky/a:$IMAGE_TAG .
-         # Push the Docker image to the public ECR repository (no login required)
-         docker push public.ecr.aws/s5y7m4v1/tasky/a:$IMAGE_TAG
+      - name: Build, tag, and push Docker image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # Build the Docker image
+          docker build -t public.ecr.aws/s5y7m4v1/tasky/a:$IMAGE_TAG .
+          # Push the Docker image to the public ECR repository (no login required)
+          docker push public.ecr.aws/s5y7m4v1/tasky/a:$IMAGE_TAG
 
 
       - name: Update Kubernetes manifests
