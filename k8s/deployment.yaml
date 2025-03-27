@@ -27,7 +27,7 @@ spec:
                 - arm64
       containers:
       - name: tasky
-        image: public.ecr.aws/s5y7m4v1/tasky/a:latest
+        image: IMAGE_PLACEHOLDER
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
