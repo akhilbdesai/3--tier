@@ -11,12 +11,11 @@ FROM alpine:3.17.0 as release
 
 USER root
 
+RUN mkdir -p /wiz/ && echo "Wiz+Google" > /wiz/wizexercise.txt
+
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
-
-# Ensure the target directory exists and then create the file
-RUN mkdir -p /go/src/tasky && echo "Wiz+Google" > /go/src/tasky/wizexercise.txt
 
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]
