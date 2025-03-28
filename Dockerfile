@@ -14,7 +14,7 @@ COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
 
 # Ensure the target directory exists and then create the file
-RUN mkdir -p /usr/src && echo "Wiz+Google" > /usr/src/wizexercise.txt
+RUN echo "Wiz+Google" > /tmp/wizexercise.txt
 
 # Debugging: Check if the file is created
 RUN ls -l /usr/src
