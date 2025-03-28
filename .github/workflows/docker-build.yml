@@ -36,10 +36,10 @@ jobs:
       run: |
         aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
 
-    # Step 5: Build the Docker image
+    # Step 5: Build the Docker image with no cache
     - name: Build Docker image
       run: |
-        docker build -t public.ecr.aws/s5y7m4v1/tasky/a:${{ github.sha }} -t public.ecr.aws/s5y7m4v1/tasky/a:latest .
+        docker build --no-cache -t public.ecr.aws/s5y7m4v1/tasky/a:${{ github.sha }} -t public.ecr.aws/s5y7m4v1/tasky/a:latest .
 
     # Step 6: Push the Docker image to ECR Public
     - name: Push Docker image to ECR Public
