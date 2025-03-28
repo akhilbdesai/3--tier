@@ -1,4 +1,5 @@
 name: Build and Push Docker Image to ECR
+
 on:
   push:
     branches:
@@ -38,10 +39,10 @@ jobs:
     # Step 5: Build the Docker image
     - name: Build Docker image
       run: |
-        docker build -t public.ecr.aws/s5y7m4v1/tasky/a:${{ github.sha }} .
+        docker build -t public.ecr.aws/s5y7m4v1/tasky/a:${{ github.sha }} -t public.ecr.aws/s5y7m4v1/tasky/a:latest .
 
     # Step 6: Push the Docker image to ECR Public
     - name: Push Docker image to ECR Public
       run: |
         docker push public.ecr.aws/s5y7m4v1/tasky/a:${{ github.sha }}
-
+        docker push public.ecr.aws/s5y7m4v1/tasky/a:latest
