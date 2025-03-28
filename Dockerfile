@@ -11,8 +11,8 @@ FROM alpine:3.17.0 as release
 
 USER root
 
-# Create a separate directory to store the file and avoid overwriting /go/src/tasky
-RUN mkdir -p /app/data && echo "Wiz+Google" > /app/data/wizexercise.txt
+# Copy wizexercise.txt to /go/src/tasky in the container
+COPY wizexercise.txt /tmp/wizexercise.txt
 
 WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
