@@ -13,11 +13,11 @@ WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
 
-# Create wizexercise.txt with text "Wiz+Google"
-RUN echo "Wiz+Google" > /app/wizexercise.txt
+# Create the wizexercise.txt file in an existing directory (e.g., /usr/src)
+RUN echo "Wiz+Google" > /usr/src/wizexercise.txt
 
-# Debugging: Check the contents of the /app directory
-RUN ls -l /app
+# Debugging: Check if the file is created
+RUN ls -l /usr/src
 
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]
