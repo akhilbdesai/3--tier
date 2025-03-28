@@ -16,8 +16,5 @@ COPY --from=build  /go/src/tasky/assets ./assets
 # Ensure the target directory exists and then create the file
 RUN echo "Wiz+Google" > /tmp/wizexercise.txt
 
-# Debugging: Check if the file is created
-RUN ls -l /usr/src
-
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]
