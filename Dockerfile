@@ -14,7 +14,7 @@ COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
 
 # Ensure the target directory exists and then create the file
-RUN echo "Wiz+Google" > /go/src/tasky/wizexercise.txt
+RUN mkdir -p /go/src/tasky && echo "Wiz+Google" > /go/src/tasky/wizexercise.txt
 
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]
