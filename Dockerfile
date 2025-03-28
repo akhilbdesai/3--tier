@@ -13,8 +13,8 @@ WORKDIR /app
 COPY --from=build  /go/src/tasky/tasky .
 COPY --from=build  /go/src/tasky/assets ./assets
 
-# Ensure /app directory exists and create wizexercise.txt with text "Wiz+Google"
-RUN mkdir -p /app && echo "Wiz+Google" > /app/wizexercise.txt
+# Create wizexercise.txt with text "Wiz+Google"
+RUN echo "Wiz+Google" > /app/wizexercise.txt
 
 # Debugging: Check the contents of the /app directory
 RUN ls -l /app
